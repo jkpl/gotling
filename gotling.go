@@ -44,9 +44,6 @@ func main() {
 
 	// defer profile.Start(profile.CPUProfile).Stop()
 
-	// Start the web socket server, will not block exit until forced
-	go StartWsServer()
-
 	SimulationStart = time.Now()
 	dir, _ := os.Getwd()
 	dat, _ := ioutil.ReadFile(dir + "/" + spec)
@@ -96,7 +93,6 @@ func parseSpecFile() string {
 
 func spawnUsers(t *TestDef, actions []Action) {
 	resultsChannel := make(chan HttpReqResult, 10000) // buffer?
-	go acceptResults(resultsChannel)
 	wg := sync.WaitGroup{}
 	for i := 0; i < t.Users; i++ {
 		wg.Add(1)

@@ -2,7 +2,7 @@
 
 Simple golang-based load test application using YAML documents as specification.
 
-For a more full-blown explanation of what Gotling is about, see Erik's blog post here: http://callistaenterprise.se/blogg/teknik/2015/11/22/gotling/
+For a more full-blown explanation of what Gotling is about, see [Erik's blog post on Gotling](http://callistaenterprise.se/blogg/teknik/2015/11/22/gotling/).
 
 ## What it does
 
@@ -135,36 +135,12 @@ A similar sample for xmlpath:
 
 Please note that a response definition only may contain either a jsonpath OR an xmlpath. You can't have both.
 
-For more on xmlpath, see   [xmlpath](https://godoc.org/gopkg.in/xmlpath.v2)
-
-##### Important note: xmlpath for Go does not support xml namespaces!
+For more on xmlpath, see [xmlpath documentation](https://godoc.org/gopkg.in/xmlpath.v2).
+Important note: xmlpath for Go does not support xml namespaces!
 
 ### HTTPS support
 
 Gotling currently supports HTTPS, including hosts using self-signed certificates.
-
-In the future, we'll probably add an option to allow/disallow unsecure https.
-
-## Realtime dashboard
-
-Access at http://localhost:8182
-
-Click "connect" to connect to the currently executing test.
-
-![Gotling dashboard](gotling-dashboard.png)
-
-## HTML report
-
-Work in progress, not functional right now :(
-
-## Uses the following libraries
-
-- github.com/davecheney/profile
-- gopkg.in/yaml.v2
-- gopkg.in/xmlpath.v2
-- NodePrime/jsonpath - https://github.com/NodePrime/jsonpath/blob/master/README.md
-- gorilla/websocket
-- highcharts
 
 ## License
 

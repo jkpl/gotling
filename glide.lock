@@ -1,9 +1,6 @@
-hash: ef6d3547ea46dedd81e1d76fd78bc0127a6063cc9333e13cbbcbc994553ba4b3
-updated: 2017-07-08T14:46:50.911965701+01:00
+hash: e314775348bfa97fddcbe104a0688fd9f9204fc17a66c582801d70f52edcbb07
+updated: 2017-07-08T15:25:38.771896663+01:00
 imports:
-- name: github.com/gorilla/websocket
-  version: 4935ba31a2adbfcd9e08b86d2657659afbf1af9a
-  repo: https://github.com/gorilla/websocket
 - name: github.com/NodePrime/jsonpath
   version: 84403ded544328c99be3472727667179eef23a91
   repo: https://github.com/NodePrime/jsonpath
@@ -25,6 +22,4 @@ imports:
 - name: gopkg.in/yaml.v2
   version: f7716cbe52baa25d2e9b0d0da546fcf909fc16b4
   repo: https://gopkg.in/yaml.v2
-testImports:
-- name: github.com/eriklupander/gotling
-  version: dcb2245ec20ef118280a33062864bb4585a71122
+testImports: []
