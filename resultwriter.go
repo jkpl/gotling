@@ -22,10 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 package main
+
 import (
-    "os"
-    "bufio"
-    "encoding/json"
+	"bufio"
+	"encoding/json"
+	"os"
 )
 
 var w *bufio.Writer
@@ -35,44 +36,44 @@ var err error
 var opened bool = false
 
 func OpenResultsFile(fileName string) {
-    if !opened {
-        opened = true
-    } else {
-        return
-    }
-    f, err = os.Create(fileName)
-    if err != nil {
-    	os.Mkdir("results", 0777);
-        os.Mkdir("results/log", 0777);
-        f, err = os.Create(fileName)
-        if err != nil {
-            panic(err)
-        }
-    }
-    w = bufio.NewWriter(f)
-    _, err = w.WriteString(string("var logdata = '"))
+	if !opened {
+		opened = true
+	} else {
+		return
+	}
+	f, err = os.Create(fileName)
+	if err != nil {
+		os.Mkdir("results", 0777)
+		os.Mkdir("results/log", 0777)
+		f, err = os.Create(fileName)
+		if err != nil {
+			panic(err)
+		}
+	}
+	w = bufio.NewWriter(f)
+	_, err = w.WriteString(string("var logdata = '"))
 }
 
 func CloseResultsFile() {
-    if opened {
-        _, err = w.WriteString(string("';"))
-        w.Flush()
-        f.Close()
-    }
-    // Do nothing if not opened
+	if opened {
+		_, err = w.WriteString(string("';"))
+		w.Flush()
+		f.Close()
+	}
+	// Do nothing if not opened
 }
 
 func writeResult(httpResult *HttpReqResult) {
-    jsonString, err := json.Marshal(httpResult)
-    if err != nil {
-        panic(err)
-    }
-    _, err = w.WriteString(string(jsonString))
-    _, err = w.WriteString("|")
+	jsonString, err := json.Marshal(httpResult)
+	if err != nil {
+		panic(err)
+	}
+	_, err = w.WriteString(string(jsonString))
+	_, err = w.WriteString("|")
 
-    if err != nil {
-        panic(err)
-    }
-    w.Flush()
+	if err != nil {
+		panic(err)
+	}
+	w.Flush()
 
 }

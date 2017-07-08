@@ -22,9 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 package main
+
 import (
-	"time"
 	"fmt"
+	"time"
 )
 
 /**
@@ -35,17 +36,17 @@ func aggregatePerSecondHandler(perSecondChannel chan *HttpReqResult) {
 
 	for {
 
-		var totalReq  int = 0
+		var totalReq int = 0
 		var totalLatency int = 0
 		until := time.Now().UnixNano() + 1000000000
 		for time.Now().UnixNano() < until {
 			select {
 			case msg := <-perSecondChannel:
 				totalReq++
-				totalLatency += int(msg.Latency/1000) // measure in microseconds
+				totalLatency += int(msg.Latency / 1000) // measure in microseconds
 			default:
-			// Can be trouble. Uses too much CPU if low, limits throughput if too high
-				time.Sleep(100*time.Microsecond)
+				// Can be trouble. Uses too much CPU if low, limits throughput if too high
+				time.Sleep(100 * time.Microsecond)
 			}
 		}
 		// concurrently assemble the result and send it off to the websocket.
@@ -59,12 +60,12 @@ func assembleAndSendResult(totalReq int, totalLatency int) {
 	if totalReq > 0 {
 		avgLatency = totalLatency / totalReq
 	}
-	statFrame := StatFrame {
+	statFrame := StatFrame{
 		time.Since(SimulationStart).Nanoseconds() / 1000000000, // seconds
-		avgLatency,                                             // microseconds
+		avgLatency, // microseconds
 		totalReq,
 	}
-	fmt.Printf("Time: %d Avg latency: %d μs (%d ms) req/s: %d\n", statFrame.Time, statFrame.Latency, statFrame.Latency / 1000, statFrame.Reqs)
+	fmt.Printf("Time: %d Avg latency: %d μs (%d ms) req/s: %d\n", statFrame.Time, statFrame.Latency, statFrame.Latency/1000, statFrame.Reqs)
 	BroadcastStatFrame(statFrame)
 }
 
@@ -79,13 +80,13 @@ func acceptResults(resChannel chan HttpReqResult) {
 		case msg := <-resChannel:
 			perSecondAggregatorChannel <- &msg
 			writeResult(&msg) // sync write result to file for later processing.
-            break
-		case <-	time.After(100 * time.Microsecond):
-            break
-//		default:
-//			// This is troublesome. If too high, throughput is bad. Too low, CPU use goes up too much
-//			// Using a sync channel kills performance
-//			time.Sleep(100 * time.Microsecond)
+			break
+		case <-time.After(100 * time.Microsecond):
+			break
+			//		default:
+			//			// This is troublesome. If too high, throughput is bad. Too low, CPU use goes up too much
+			//			// Using a sync channel kills performance
+			//			time.Sleep(100 * time.Microsecond)
 		}
 	}
 }

@@ -26,7 +26,7 @@ package main
 type UdpAction struct {
 	Address string `yaml:"address"`
 	Payload string `yaml:"payload"`
-	Title string `yaml:"title"`
+	Title   string `yaml:"title"`
 }
 
 func (t UdpAction) Execute(resultsChannel chan HttpReqResult, sessionMap map[string]string) {
@@ -42,6 +42,7 @@ func NewUdpAction(a map[interface{}]interface{}) UdpAction {
 		a["title"].(string),
 	}
 }
+
 /*
 
  */

@@ -24,9 +24,9 @@ SOFTWARE.
 package main
 
 import (
+	"fmt"
 	"net"
-    "fmt"
-    "time"
+	"time"
 )
 
 var udpconn *net.UDPConn
@@ -34,48 +34,48 @@ var udpconn *net.UDPConn
 // Accepts a UdpAction and a one-way channel to write the results to.
 func DoUdpRequest(udpAction UdpAction, resultsChannel chan HttpReqResult, sessionMap map[string]string) {
 
-    address := SubstParams(sessionMap, udpAction.Address)
-    payload := SubstParams(sessionMap, udpAction.Payload)
+	address := SubstParams(sessionMap, udpAction.Address)
+	payload := SubstParams(sessionMap, udpAction.Payload)
 
-    if udpconn == nil {
-        ServerAddr,err := net.ResolveUDPAddr("udp", address) //"127.0.0.1:10001")
-        if err != nil {
-            fmt.Println("Error ResolveUDPAddr remote: " + err.Error())
-        }
+	if udpconn == nil {
+		ServerAddr, err := net.ResolveUDPAddr("udp", address) //"127.0.0.1:10001")
+		if err != nil {
+			fmt.Println("Error ResolveUDPAddr remote: " + err.Error())
+		}
 
-        LocalAddr, err := net.ResolveUDPAddr("udp", "127.0.0.1:0")
-        if err != nil {
-            fmt.Println("Error ResolveUDPAddr local: " + err.Error())
-        }
+		LocalAddr, err := net.ResolveUDPAddr("udp", "127.0.0.1:0")
+		if err != nil {
+			fmt.Println("Error ResolveUDPAddr local: " + err.Error())
+		}
 
-        udpconn, err = net.DialUDP("udp", LocalAddr, ServerAddr)
-        if err != nil {
-            fmt.Println("Error Dial: " + err.Error())
-        }
-    }
-    //defer Conn.Close()
-    start := time.Now()
-    if udpconn != nil {
-        _, err = fmt.Fprintf(udpconn, payload + "\r\n")
-    }
-    if err != nil {
-        fmt.Printf("UDP request failed with error: %s\n", err)
-        udpconn = nil
-    }
+		udpconn, err = net.DialUDP("udp", LocalAddr, ServerAddr)
+		if err != nil {
+			fmt.Println("Error Dial: " + err.Error())
+		}
+	}
+	//defer Conn.Close()
+	start := time.Now()
+	if udpconn != nil {
+		_, err = fmt.Fprintf(udpconn, payload+"\r\n")
+	}
+	if err != nil {
+		fmt.Printf("UDP request failed with error: %s\n", err)
+		udpconn = nil
+	}
 
-    elapsed := time.Since(start)
-    resultsChannel <- buildUdpResult(0, 200, elapsed.Nanoseconds(), udpAction.Title)
+	elapsed := time.Since(start)
+	resultsChannel <- buildUdpResult(0, 200, elapsed.Nanoseconds(), udpAction.Title)
 
 }
 
-func buildUdpResult(contentLength int, status int, elapsed int64, title string) (HttpReqResult){
-    httpReqResult := HttpReqResult {
-        "UDP",
-        elapsed,
-        contentLength,
-        status,
-        title,
-        time.Since(SimulationStart).Nanoseconds(),
-    }
-    return httpReqResult
+func buildUdpResult(contentLength int, status int, elapsed int64, title string) HttpReqResult {
+	httpReqResult := HttpReqResult{
+		"UDP",
+		elapsed,
+		contentLength,
+		status,
+		title,
+		time.Since(SimulationStart).Nanoseconds(),
+	}
+	return httpReqResult
 }
