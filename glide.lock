@@ -1,14 +1,11 @@
-hash: 780be739d0b764fcc80050f30b21611e105f3bd6838f6153c9a68ddd20e2a904
-updated: 2017-07-08T15:28:08.460938586+01:00
+hash: df9324f8168d5ea9d40c0a5932fbf80e1f2d2d172804b46d3df8d622186201bc
+updated: 2017-07-08T17:16:38.862052111+01:00
 imports:
 - name: github.com/NodePrime/jsonpath
   version: 84403ded544328c99be3472727667179eef23a91
   repo: https://github.com/NodePrime/jsonpath
   subpackages:
   - cli/jsonpath
-- name: github.com/ogier/pflag
-  version: 45c278ab3607870051a2ea9040bb85fcb8557481
-  repo: https://github.com/ogier/pflag
 - name: golang.org/x/net
   version: 054b33e6527139ad5b1ec2f6232c3b175bd9a30c
   subpackages:

@@ -5,9 +5,6 @@ import:
   repo: https://github.com/NodePrime/jsonpath
   subpackages:
   - cli/jsonpath
-- package: github.com/ogier/pflag
-  version: 45c278ab3607870051a2ea9040bb85fcb8557481
-  repo: https://github.com/ogier/pflag
 - package: gopkg.in/yaml.v2
   version: f7716cbe52baa25d2e9b0d0da546fcf909fc16b4
   repo: https://gopkg.in/yaml.v2
