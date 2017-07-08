@@ -1,5 +1,5 @@
-hash: e314775348bfa97fddcbe104a0688fd9f9204fc17a66c582801d70f52edcbb07
-updated: 2017-07-08T15:25:38.771896663+01:00
+hash: 780be739d0b764fcc80050f30b21611e105f3bd6838f6153c9a68ddd20e2a904
+updated: 2017-07-08T15:28:08.460938586+01:00
 imports:
 - name: github.com/NodePrime/jsonpath
   version: 84403ded544328c99be3472727667179eef23a91
@@ -9,9 +9,6 @@ imports:
 - name: github.com/ogier/pflag
   version: 45c278ab3607870051a2ea9040bb85fcb8557481
   repo: https://github.com/ogier/pflag
-- name: github.com/tobyhede/go-underscore
-  version: ea55fc9569918f099b1dfa785088434e5c53544d
-  repo: https://github.com/tobyhede/go-underscore
 - name: golang.org/x/net
   version: 054b33e6527139ad5b1ec2f6232c3b175bd9a30c
   subpackages:
