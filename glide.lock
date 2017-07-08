@@ -1,0 +1,30 @@
+hash: ef6d3547ea46dedd81e1d76fd78bc0127a6063cc9333e13cbbcbc994553ba4b3
+updated: 2017-07-08T14:46:50.911965701+01:00
+imports:
+- name: github.com/gorilla/websocket
+  version: 4935ba31a2adbfcd9e08b86d2657659afbf1af9a
+  repo: https://github.com/gorilla/websocket
+- name: github.com/NodePrime/jsonpath
+  version: 84403ded544328c99be3472727667179eef23a91
+  repo: https://github.com/NodePrime/jsonpath
+  subpackages:
+  - cli/jsonpath
+- name: github.com/ogier/pflag
+  version: 45c278ab3607870051a2ea9040bb85fcb8557481
+  repo: https://github.com/ogier/pflag
+- name: github.com/tobyhede/go-underscore
+  version: ea55fc9569918f099b1dfa785088434e5c53544d
+  repo: https://github.com/tobyhede/go-underscore
+- name: golang.org/x/net
+  version: 054b33e6527139ad5b1ec2f6232c3b175bd9a30c
+  subpackages:
+  - html
+  - html/atom
+- name: gopkg.in/xmlpath.v2
+  version: 860cbeca3ebcc600db0b213c0e83ad6ce91f5739
+- name: gopkg.in/yaml.v2
+  version: f7716cbe52baa25d2e9b0d0da546fcf909fc16b4
+  repo: https://gopkg.in/yaml.v2
+testImports:
+- name: github.com/eriklupander/gotling
+  version: dcb2245ec20ef118280a33062864bb4585a71122

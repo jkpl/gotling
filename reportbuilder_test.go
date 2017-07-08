@@ -21,20 +21,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-package main_test
+package main
 
 import (
-    "github.com/eriklupander/gotling"
-    "testing"
+	"testing"
 )
 
 func init() {
 }
 
 func TestEach(t *testing.T) {
-    var numbers = []int{1,2,3,4,5}
-    result := main.SumZeroes(numbers)
-    if result != 15 {
-        t.Errorf("Expected sum to be 15")
-    }
+	var numbers = []int{1, 2, 3, 4, 5}
+	result := SumZeroes(numbers)
+	if result != 15 {
+		t.Errorf("Expected sum to be 15")
+	}
 }

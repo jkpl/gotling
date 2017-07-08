@@ -1,0 +1,23 @@
+package: github.com/jkpl/gotling
+import:
+- package: github.com/NodePrime/jsonpath
+  version: 84403ded544328c99be3472727667179eef23a91
+  repo: https://github.com/NodePrime/jsonpath
+  subpackages:
+  - cli/jsonpath
+- package: github.com/gorilla/websocket
+  version: 4935ba31a2adbfcd9e08b86d2657659afbf1af9a
+  repo: https://github.com/gorilla/websocket
+- package: github.com/ogier/pflag
+  version: 45c278ab3607870051a2ea9040bb85fcb8557481
+  repo: https://github.com/ogier/pflag
+- package: github.com/tobyhede/go-underscore
+  version: ea55fc9569918f099b1dfa785088434e5c53544d
+  repo: https://github.com/tobyhede/go-underscore
+- package: gopkg.in/yaml.v2
+  version: f7716cbe52baa25d2e9b0d0da546fcf909fc16b4
+  repo: https://gopkg.in/yaml.v2
+- package: gopkg.in/xmlpath.v2
+testImport:
+- package: github.com/eriklupander/gotling
+  version: ^0.2.0
