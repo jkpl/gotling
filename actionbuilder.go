@@ -30,8 +30,8 @@ import (
 )
 
 func buildActionList(t *TestDef) ([]Action, bool) {
-	var valid bool = true
-	actions := make([]Action, len(t.Actions), len(t.Actions))
+	valid := true
+	actions := make([]Action, len(t.Actions))
 	for _, element := range t.Actions {
 		for key, value := range element {
 			var action Action
@@ -39,19 +39,15 @@ func buildActionList(t *TestDef) ([]Action, bool) {
 			switch key {
 			case "sleep":
 				action = NewSleepAction(actionMap)
-				break
 			case "http":
 				action = NewHttpAction(actionMap)
-				break
 			case "tcp":
 				action = NewTcpAction(actionMap)
 			case "udp":
 				action = NewUdpAction(actionMap)
-				break
 			default:
 				valid = false
 				log.Fatal("Unknown action type encountered: " + key)
-				break
 			}
 			if valid {
 				actions = append(actions, action)
@@ -65,9 +61,8 @@ func getBody(action map[interface{}]interface{}) string {
 	//var body string = ""
 	if action["body"] != nil {
 		return action["body"].(string)
-	} else {
-		return ""
 	}
+	return ""
 }
 
 func getTemplate(action map[interface{}]interface{}) string {
@@ -76,7 +71,6 @@ func getTemplate(action map[interface{}]interface{}) string {
 		dir, _ := os.Getwd()
 		templateData, _ := ioutil.ReadFile(dir + "/templates/" + templateFile)
 		return string(templateData)
-	} else {
-		return ""
 	}
+	return ""
 }

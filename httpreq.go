@@ -119,7 +119,7 @@ func buildHttpRequest(httpAction HttpAction, sessionMap map[string]string) *http
 		if strings.HasPrefix(key, "____") {
 
 			cookie := http.Cookie{
-				Name:  key[4:len(key)],
+				Name:  key[4:],
 				Value: value,
 			}
 
@@ -219,17 +219,14 @@ func passResultIntoSessionMap(resultsArray []string, httpAction HttpAction, sess
 		switch httpAction.ResponseHandler.Index {
 		case FIRST:
 			sessionMap[httpAction.ResponseHandler.Variable] = resultsArray[0]
-			break
 		case LAST:
 			sessionMap[httpAction.ResponseHandler.Variable] = resultsArray[resultCount-1]
-			break
 		case RANDOM:
 			if resultCount > 1 {
 				sessionMap[httpAction.ResponseHandler.Variable] = resultsArray[rand.Intn(resultCount-1)]
 			} else {
 				sessionMap[httpAction.ResponseHandler.Variable] = resultsArray[0]
 			}
-			break
 		}
 
 	} else {

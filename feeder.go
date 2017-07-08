@@ -43,7 +43,7 @@ var FeedChannel chan map[string]string
 //
 func NextFromFeeder() {
 
-	if data != nil && len(data) > 0 {
+	if len(data) > 0 {
 
 		// Push data into the FeedChannel
 		// fmt.Printf("Current index: %d of total size: %d\n", index, len(data))
@@ -52,7 +52,7 @@ func NextFromFeeder() {
 		// Cycle, does this need to be synchronized?
 		l.Lock()
 		if index < len(data)-1 {
-			index += 1
+			index++
 		} else {
 			index = 0
 		}
@@ -66,9 +66,9 @@ func Csv(filename string, separator string) {
 	file, _ := os.Open(dir + "/data/" + filename)
 
 	scanner := bufio.NewScanner(file)
-	var lines int = 0
+	lines := 0
 
-	data = make([]map[string]string, 0, 0)
+	data = make([]map[string]string, 0)
 
 	// Scan the first line, should contain headers.
 	scanner.Scan()

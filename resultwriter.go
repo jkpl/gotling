@@ -25,7 +25,6 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"os"
 )
 
@@ -33,7 +32,7 @@ var w *bufio.Writer
 var f *os.File
 var err error
 
-var opened bool = false
+var opened = false
 
 func OpenResultsFile(fileName string) {
 	if !opened {
@@ -61,19 +60,4 @@ func CloseResultsFile() {
 		f.Close()
 	}
 	// Do nothing if not opened
-}
-
-func writeResult(httpResult *HttpReqResult) {
-	jsonString, err := json.Marshal(httpResult)
-	if err != nil {
-		panic(err)
-	}
-	_, err = w.WriteString(string(jsonString))
-	_, err = w.WriteString("|")
-
-	if err != nil {
-		panic(err)
-	}
-	w.Flush()
-
 }

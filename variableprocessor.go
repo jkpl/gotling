@@ -29,7 +29,7 @@ import (
 	"strings"
 )
 
-var re = regexp.MustCompile("\\$\\{([a-zA-Z0-9]{0,})\\}")
+var re = regexp.MustCompile(`\$\{([a-zA-Z0-9]{0,})\}`)
 
 func SubstParams(sessionMap map[string]string, textData string) string {
 	if strings.ContainsAny(textData, "${") {
@@ -37,8 +37,6 @@ func SubstParams(sessionMap map[string]string, textData string) string {
 		for _, v := range res {
 			textData = strings.Replace(textData, "${"+v[1]+"}", url.QueryEscape(sessionMap[v[1]]), 1)
 		}
-		return textData
-	} else {
 		return textData
 	}
 	return textData

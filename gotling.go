@@ -49,7 +49,7 @@ func main() {
 	dat, _ := ioutil.ReadFile(dir + "/" + spec)
 
 	var t TestDef
-	yaml.Unmarshal([]byte(dat), &t)
+	yaml.Unmarshal(dat, &t)
 
 	if !ValidateTestDefinition(&t) {
 		return
@@ -77,7 +77,6 @@ func main() {
 
 func parseSpecFile() string {
 	if len(os.Args) == 1 {
-		fmt.Errorf("No command line arguments, exiting...\n")
 		panic("Cannot start simulation, no YAML simulaton specification supplied as command-line argument")
 	}
 	var s, sep string
@@ -98,7 +97,7 @@ func spawnUsers(t *TestDef, actions []Action) {
 		wg.Add(1)
 		UID := strconv.Itoa(rand.Intn(t.Users+1) + 10000)
 		go launchActions(t, resultsChannel, &wg, actions, UID)
-		var waitDuration float32 = float32(t.Rampup) / float32(t.Users)
+		waitDuration := float32(t.Rampup) / float32(t.Users)
 		time.Sleep(time.Duration(int(1000*waitDuration)) * time.Millisecond)
 	}
 	fmt.Println("All users started, waiting at WaitGroup")
