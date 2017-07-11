@@ -51,11 +51,6 @@ var SimulationStart time.Time
 var data []map[string]string
 var index = 0
 
-var l sync.Mutex
-
-// "public" synchronized channel for delivering feeder data
-var FeedChannel chan map[string]string
-
 var w *bufio.Writer
 var f *os.File
 var err error
@@ -117,26 +112,6 @@ type Action interface {
 	Execute(resultsChannel chan HttpReqResult, sessionMap map[string]string)
 }
 
-func NextFromFeeder() {
-
-	if len(data) > 0 {
-
-		// Push data into the FeedChannel
-		// fmt.Printf("Current index: %d of total size: %d\n", index, len(data))
-		FeedChannel <- data[index]
-
-		// Cycle, does this need to be synchronized?
-		l.Lock()
-		if index < len(data)-1 {
-			index++
-		} else {
-			index = 0
-		}
-		l.Unlock()
-	}
-
-}
-
 func Csv(filename string, separator string) {
 	dir, _ := os.Getwd()
 	file, _ := os.Open(dir + "/data/" + filename)
@@ -165,7 +140,6 @@ func Csv(filename string, separator string) {
 	}
 	index = 0
 	fmt.Printf("CSV feeder fed with %d lines of data\n", lines)
-	FeedChannel = make(chan map[string]string)
 }
 
 func main() {
@@ -269,10 +243,10 @@ func cleanSessionMapAndResetUID(uid string, sessionMap map[string]string) {
 
 func feedSession(t *TestDef, sessionMap map[string]string) {
 	if t.Feeder.Type != "" {
-		go NextFromFeeder()       // Do async
-		feedData := <-FeedChannel // Will block here until feeder delivers value over the FeedChannel
-		for item := range feedData {
-			sessionMap[item] = feedData[item]
+		i := rand.Intn(len(data))
+		d := data[i]
+		for k, v := range d {
+			sessionMap[k] = v
 		}
 	}
 }
